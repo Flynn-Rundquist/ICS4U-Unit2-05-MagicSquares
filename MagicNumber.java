@@ -45,12 +45,20 @@ final class Main {
     private static int numberOfMagicSquares = 0;
 
     public static void genSquare2(final int[] square, final int index) {
-        // generate the magic sqaure
-    }
+        for (int counter = 0; counter < NINE; counter++) {
+            numberOfProcess++;
+            square[index] = counter;
 
-    public static void genSquare(final int[] square, final int[] currentSquare,
-                                 final int index) {
-        // generate the magic sqaure
+            if (index < 8) {
+                genSquare2(square, index + 1);
+            } else {
+                if (isMagic(square)) {
+                    numberOfMagicSquares++;
+                    printMagicSquare(square);
+                }
+            }
+        }
+        
     }
 
     public static boolean isMagic(final int[] preSquare) {
@@ -87,14 +95,12 @@ final class Main {
     public static void main(final String[] args) {
         // main stub, get user input here
         int[] magicSquare = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-        int[] extraArray = {0, 0, 0, 0, 0, 0, 0, 0, 0};
         System.out.println("\n");
         System.out.println("All Possible Magic Squares (3x3):\n");
-        //genSquare2(magicSquare, 0);
-        //genSquare(magicSquare, extraArray, 0);
+        genSquare2(magicSquare, 0);
 
         System.out.println("Number of processes: " + numberOfProcess);
-        System.out.println("Number of Magic Squares: " + numberOfMagicSquares);
+        System.out.println("Number of magic squares: " + numberOfMagicSquares);
         System.out.println("\nDone.");
     }
 }
